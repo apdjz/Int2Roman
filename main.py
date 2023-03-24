@@ -1,19 +1,14 @@
-# decimal number to roman numerals
-def printRoman(number):
-    num = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
-    rom = ["I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"]
-    i = 12
-    while number:
-        div = number // num[i]
-        number %= num[i]
- 
-        while div:
-        # won't work with 2.7. ends the output with a <space>
-            print(rom[i], end = "")
-            div -= 1
-        i -= 1
- 
-# Driver code
-if __name__ == "__main__":
-    number = 2021
-    printRoman(number)
+def to_roman(num: int) -> str:
+    roman_map = [
+        (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
+        (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
+        (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")
+    ]
+
+    roman = ""
+    for value, symbol in roman_map:
+        while num >= value:
+            roman += symbol
+            num -= value
+
+    return roman
